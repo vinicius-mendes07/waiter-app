@@ -1,8 +1,8 @@
-import { FlatList } from "react-native";
-import { categories } from "../../mocks/categories";
-import { Text } from "../Text";
-import { Category, Icon } from "./styles";
-import { useState } from "react";
+import { FlatList } from 'react-native';
+import { categories } from '../../mocks/categories';
+import { Text } from '../Text';
+import { Category, Icon } from './styles';
+import { useState } from 'react';
 
 export function Categories() {
   const [selectedCategory, setSelectedCategory] = useState('');

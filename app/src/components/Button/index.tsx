@@ -1,5 +1,5 @@
-import { Text } from "../Text";
-import { Container } from "./styles";
+import { Text } from '../Text';
+import { Container } from './styles';
 
 interface ButtonProps {
   children: string;
@@ -10,7 +10,9 @@ interface ButtonProps {
 export function Button({ children, onPress, disabled }: ButtonProps) {
   return (
     <Container onPress={onPress} disabled={disabled}>
-      <Text color="#fff" weight="600">{children}</Text>
+      <Text color="#fff" weight="600">
+        {children}
+      </Text>
     </Container>
   );
 }

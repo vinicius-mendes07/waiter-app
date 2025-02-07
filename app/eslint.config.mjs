@@ -1,7 +1,8 @@
 import pluginJs from "@eslint/js";
 import tseslint from "typescript-eslint";
 import pluginReact from "eslint-plugin-react";
-
+import prettier from 'eslint-plugin-prettier';
+import prettierConfig from './prettier.config.mjs';
 
 /** @type {import('eslint').Linter.Config[]} */
 export default [
@@ -9,6 +10,13 @@ export default [
   pluginJs.configs.recommended,
   ...tseslint.configs.recommended,
   pluginReact.configs.flat.recommended,
+  {
+    files: ['**/*.tsx', '**/*.ts', '**/*.js'],
+    plugins: { prettier },
+    rules: {
+      'prettier/prettier': ['error', prettierConfig],
+    },
+  },
   {
     rules: {
       "react/react-in-jsx-scope": "off",
