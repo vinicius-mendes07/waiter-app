@@ -21,17 +21,24 @@ export function Main() {
     setSelectedTable(table);
   }
 
+  function handleCancelOrder() {
+    setSelectedTable('');
+  }
+
   return (
     <>
       <Container>
-        <Header />
+        <Header selectedTable={selectedTable} onCancelOrder={handleCancelOrder} />
+
         <CategoriesContainer>
           <Categories />
         </CategoriesContainer>
+
         <MenuContainer>
           <Menu />
         </MenuContainer>
       </Container>
+
       <Footer>
         <FooterContainer>
           {!selectedTable && (
@@ -39,6 +46,7 @@ export function Main() {
           )}
         </FooterContainer>
       </Footer>
+
       <TableModal
         visible={isTableModalVisible}
         onClose={() => setIsTableModalVisible(false)}
