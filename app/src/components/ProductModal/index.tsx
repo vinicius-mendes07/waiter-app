@@ -1,4 +1,5 @@
 import { FlatList, Modal } from 'react-native';
+
 import { Text } from '../Text';
 import { Product } from '../../types/Product';
 import {
@@ -20,11 +21,22 @@ interface ProductModalProps {
   visible: boolean;
   onClose: () => void;
   product: Product | null;
+  onAddToCart: (product: Product) => void;
 }
 
-export function ProductModal({ visible, onClose, product }: ProductModalProps) {
+export function ProductModal({
+  visible,
+  onClose,
+  product,
+  onAddToCart,
+}: ProductModalProps) {
   if (!product) {
     return null;
+  }
+
+  function handleAddToCart() {
+    onAddToCart(product!);
+    onClose();
   }
 
   return (
@@ -36,7 +48,7 @@ export function ProductModal({ visible, onClose, product }: ProductModalProps) {
     >
       <Image
         source={{
-          uri: `http://192.168.1.31:3001/uploads/${product.imagePath}`,
+          uri: `http://172.18.128.1:3001/uploads/${product.imagePath}`,
         }}
       >
         <CloseButton onPress={onClose}>
@@ -84,7 +96,7 @@ export function ProductModal({ visible, onClose, product }: ProductModalProps) {
             </Text>
           </PriceContainer>
 
-          <Button onPress={() => alert('add')}>Adicionar ao pedido</Button>
+          <Button onPress={handleAddToCart}>Adicionar ao pedido</Button>
         </FooterContainer>
       </Footer>
     </Modal>

@@ -49,6 +49,4 @@ export const FooterContainer = styled.SafeAreaView`
   justify-content: space-between;
 `;
 
-export const PriceContainer = styled.View`
-  flex-direction: row;
-`;
+export const PriceContainer = styled.View``;
