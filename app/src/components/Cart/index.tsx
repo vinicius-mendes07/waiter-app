@@ -16,20 +16,36 @@ import { PlusCircle } from '../Icons/PlusCircle';
 import { MinusCircle } from '../Icons/MinusCircle';
 import { Button } from '../Button';
 import { Product } from '../../types/Product';
+import { useState } from 'react';
+import { OrderConfirmedModal } from '../OrderConfirmedModal';
 
 interface CartProps {
   cartItems: CartItem[];
   onAdd: (product: Product) => void;
   onDecrement: (product: Product) => void;
+  onConfirmOrder: () => void;
 }
 
-export function Cart({ cartItems, onAdd, onDecrement }: CartProps) {
+export function Cart({ cartItems, onAdd, onDecrement, onConfirmOrder }: CartProps) {
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
   const total = cartItems.reduce(
     (acc, item) => acc + item.quantity * item.product.price,
     0,
   );
+
+  function handleConfirmOrder() {
+    setIsModalVisible(true);
+  }
+
+  function handleOk() {
+    setIsModalVisible(false);
+    onConfirmOrder();
+  }
+
   return (
     <>
+      <OrderConfirmedModal visible={isModalVisible} onOk={handleOk} />
       {cartItems.length > 0 && (
         <FlatList
           data={cartItems}
@@ -87,7 +103,7 @@ export function Cart({ cartItems, onAdd, onDecrement }: CartProps) {
           )}
         </TotalContainer>
 
-        <Button disabled={cartItems.length === 0} onPress={() => alert('confirmow')}>
+        <Button disabled={cartItems.length === 0} onPress={handleConfirmOrder}>
           Confirmar pedido
         </Button>
       </Summary>
